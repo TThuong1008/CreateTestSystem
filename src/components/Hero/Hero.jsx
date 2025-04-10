@@ -1,31 +1,31 @@
-import React from "react";
-import Navbar from "../Navbar/Navbar";
+import React, { useContext, useState } from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext";
 import Blob from "../../assets/blob.svg";
 import HeroPng from "../../assets/hero.png";
-import { animate, motion } from "framer-motion";
+import Navbar from "../Navbar/Navbar";
 
-export const FadeUp = (delay) => {
-  return {
-    initial: {
-      opacity: 0,
-      y: 50,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        duration: 0.5,
-        delay: delay,
-        ease: "easeInOut",
-      },
-    },
-  };
-};
+export const FadeUp = (delay) => ({
+  initial: { opacity: 0, y: 50 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100, duration: 0.5, delay, ease: "easeInOut" },
+  },
+});
 
 const Hero = () => {
+  const { isLoggedIn, username, profilePic, logout } = useContext(AuthContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleGetStartedClick = () => {
+    if (isLoggedIn) navigate("/create-test");
+    else navigate("/sign-in");
+  };
+
   return (
     <section className="bg-light overflow-hidden relative">
       <Navbar />
@@ -39,8 +39,7 @@ const Hero = () => {
               animate="animate"
               className="text-3xl lg:text-5xl font-bold !leading-snug"
             >
-              Let's Learn to build a{" "}
-              <span className="text-secondary">Website</span> for your business
+              Let's create and take <span className="text-secondary">Tests</span> using our website
             </motion.h1>
             <motion.div
               variants={FadeUp(0.8)}
@@ -48,13 +47,17 @@ const Hero = () => {
               animate="animate"
               className="flex justify-center md:justify-start"
             >
-              <button className="primary-btn flex items-center gap-2 group">
+              <button
+                onClick={handleGetStartedClick}
+                className="primary-btn flex items-center gap-2 group"
+              >
                 Get Started
                 <IoIosArrowRoundForward className="text-xl group-hover:translate-x-2 group-hover:-rotate-45 duration-300" />
               </button>
             </motion.div>
           </div>
         </div>
+
         {/* Hero Image */}
         <div className="flex justify-center items-center">
           <motion.img
@@ -75,6 +78,29 @@ const Hero = () => {
           />
         </div>
       </div>
+
+      {/* Avatar Dropdown */}
+      {isLoggedIn && (
+        <div className="absolute top-4 right-8">
+          <img
+            src={profilePic || "https://via.placeholder.com/150"}
+            alt="avatar"
+            className="w-12 h-12 rounded-full cursor-pointer"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          />
+          {dropdownOpen && (
+            <div className="absolute right-0 bg-white shadow-md rounded py-2 px-4">
+              <p className="text-sm font-semibold">{username}</p>
+              <button
+                onClick={logout}
+                className="mt-2 text-sm text-red-500 hover:underline"
+              >
+                Log Out
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </section>
   );
 };

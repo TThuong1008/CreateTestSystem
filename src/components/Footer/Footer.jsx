@@ -14,12 +14,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 md:gap-4">
           {/* first section */}
           <div className="space-y-4 max-w-[300px]">
-            <h1 className="text-2xl font-bold">The Coding Journey</h1>
+            <h1 className="text-2xl font-bold">The Testing Online</h1>
             <p className="text-dark2">
-              TCJ is a platform dedicated to empowering aspiring developers.
-              From beginner tutorials to advanced programming concepts, we
-              provide a comprehensive learning experience designed to help you
-              master coding skills, build projects, and launch your tech career.
+              Testing Online is a platform allows users to automatically generate multiple-choice quizzes from any input text. 
+              It analyzes the text to create relevant questions, including multiple-choice, true/false, and fill-in-the-blank formats. 
+              Quizzes can be used online or downloaded in various formats like PDF or Word for easy sharing and distribution
             </p>
           </div>
           {/* second section */}
@@ -29,13 +28,13 @@ const Footer = () => {
               <div className="text-dark2">
                 <ul className="space-y-2 text-lg">
                   <li className="cursor-pointer hover:text-secondary duration-200">
-                    Web Development
+                    Create Test
                   </li>
                   <li className="cursor-pointer hover:text-secondary duration-200">
-                    Software Development
+                    Take Test
                   </li>
                   <li className="cursor-pointer hover:text-secondary duration-200">
-                    Apps Development
+                    Teaching
                   </li>
                   <li className="cursor-pointer hover:text-secondary duration-200">
                     E-learning
@@ -78,16 +77,16 @@ const Footer = () => {
             </div>
             {/* social icons */}
             <div className="flex space-x-6 py-3">
-              <a href="https://chat.whatsapp.com/FQSKgJ5f1eIAhlyF5sVym0">
+              <a href="https://daotao.vku.udn.vn/">
                 <FaWhatsapp className="cursor-pointer hover:text-primary hover:scale-105 duration-200" />
               </a>
-              <a href="https://www.instagram.com/the.coding.journey/">
+              <a href="https://daotao.vku.udn.vn/">
                 <FaInstagram className="cursor-pointer hover:text-primary hover:scale-105 duration-200" />
               </a>
-              <a href="https://thecodingjourney.com/">
+              <a href="https://daotao.vku.udn.vn/">
                 <TbWorldWww className="cursor-pointer hover:text-primary hover:scale-105 duration-200" />
               </a>
-              <a href="https://www.youtube.com/@TheCodingJourney">
+              <a href="https://daotao.vku.udn.vn/">
                 <FaYoutube className="cursor-pointer hover:text-primary hover:scale-105 duration-200" />
               </a>
             </div>

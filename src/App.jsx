@@ -1,21 +1,58 @@
-import React from "react";
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import AuthProvider, { AuthContext } from "./AuthContext";
 import Hero from "./components/Hero/Hero";
 import Services from "./components/Services/Services";
 import Banner from "./components/Banner/Banner";
 import Subscribe from "./components/Subscribe/Subscribe";
 import Banner2 from "./components/Banner/Banner2";
 import Footer from "./components/Footer/Footer";
+import LoginPage from "./components/Navbar/signIn";
+import SignUpPage from "./components/Navbar/signUp";
+import CreateTest from "./components/Services/createTest";
+
+const PrivateRoute = ({ children }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+  return isLoggedIn ? children : <Navigate to="/sign-in" />;
+};
 
 const App = () => {
   return (
-    <main className="overflow-x-hidden bg-white text-dark">
-      <Hero />
-      <Services />
-      <Banner />
-      <Subscribe />
-      <Banner2 />
-      <Footer />
-    </main>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero />
+              <Services />
+              <Banner />
+              <Subscribe />
+              <Banner2 />
+              <Footer />
+            </>
+          }/>
+          <Route path="/sign-in" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          
+          <Route path="/create-test" element={
+            <PrivateRoute>
+              <CreateTest />
+              <Footer />
+            </PrivateRoute>
+          }/>
+
+          <Route path="/hero" element={
+            <>
+            <Hero />
+            <Services />
+            <Banner />
+            <Subscribe />
+            <Banner2 />
+            <Footer />
+          </>}/>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 

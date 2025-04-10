@@ -3,13 +3,39 @@
 @tailwind utilities;
 
 @layer components {
+  /* Nút chính */
   .primary-btn {
-    @apply inline-block bg-primary text-white font-semibold rounded-lg hover:bg-secondary duration-200 shadow-[0px_10px_8px_-7px_#ffd978] hover:shadow-[0px_10px_8px_-7px_#69a79c] py-2 px-6;
+    @apply inline-block bg-primary text-white font-semibold rounded-lg hover:bg-secondary duration-200 shadow-md py-2 px-6;
+  }
+
+  /* Nút phụ */
+  .secondary-btn {
+    @apply inline-block bg-secondary text-white font-semibold rounded-lg hover:bg-primary duration-200 shadow-md py-2 px-6;
+  }
+
+  /* Nút thành công */
+  .success-btn {
+    @apply inline-block bg-success text-white font-semibold rounded-lg hover:bg-primary duration-200 shadow-md py-2 px-6;
+  }
+
+  /* Nút lỗi */
+  .danger-btn {
+    @apply inline-block bg-danger text-white font-semibold rounded-lg hover:bg-primary duration-200 shadow-md py-2 px-6;
   }
 }
 
 @layer utilities {
+  /* Tạo hiệu ứng drop-shadow */
   .drop-shadow {
-    filter: drop-shadow(6px 8px 10px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(6px 8px 10px rgba(0, 0, 0, 0.2));
+  }
+
+  /* Thêm hiệu ứng trượt */
+  .hover-slide {
+    transition: all 0.3s ease;
+  }
+
+  .hover-slide:hover {
+    transform: translateY(-4px);
   }
 }
