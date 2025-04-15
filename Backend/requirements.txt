@@ -1,0 +1,25 @@
+# AI and ML Dependencies
+mistralai
+transformers
+torch
+
+# PDF Processing
+PyPDF2
+python-dotenv
+
+# Utilities
+typing
+loguru
+
+# Development and Testing
+pytest
+mypy
+black
+flake8
+streamlit
+fpdf2
+fpdf
+fastapi 
+uvicorn
+python-multipart
+#uvicorn main:app --reload --port 8000

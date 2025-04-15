@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@layer components {
+  /* Nút chính */
+  .primary-btn {
+    @apply inline-block bg-primary text-white font-semibold rounded-lg hover:bg-secondary duration-200 shadow-md py-2 px-6;
+  }
+
+  /* Nút phụ */
+  .secondary-btn {
+    @apply inline-block bg-secondary text-white font-semibold rounded-lg hover:bg-primary duration-200 shadow-md py-2 px-6;
+  }
+
+  /* Nút thành công */
+  .success-btn {
+    @apply inline-block bg-success text-white font-semibold rounded-lg hover:bg-primary duration-200 shadow-md py-2 px-6;
+  }
+
+  /* Nút lỗi */
+  .danger-btn {
+    @apply inline-block bg-danger text-white font-semibold rounded-lg hover:bg-primary duration-200 shadow-md py-2 px-6;
+  }
+}
+
+@layer utilities {
+  /* Tạo hiệu ứng drop-shadow */
+  .drop-shadow {
+    filter: drop-shadow(6px 8px 10px rgba(0, 0, 0, 0.2));
+  }
+
+  /* Thêm hiệu ứng trượt */
+  .hover-slide {
+    transition: all 0.3s ease;
+  }
+
+  .hover-slide:hover {
+    transform: translateY(-4px);
+  }
+}
+/* File upload section styling */
+.file-upload-card {
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-6 text-center;
+  transition: all 0.3s ease;
+}
+
+.file-upload-card:hover {
+  @apply border-blue-500 bg-blue-50;
+}
+
+/* Question list styling */
+.question-item {
+  @apply bg-gray-50 p-4 rounded-lg mb-4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .grid-cols-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .lg\:col-span-2 {
+    grid-column: span 1;
+  }
+}
