@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FiEye, FiEyeOff } from "react-icons/fi"; // Để sử dụng biểu tượng mắt
 import signUpImg from "../../assets/login.png";
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState(""); // State cho tên người dùng
@@ -10,15 +11,37 @@ const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!username || !email || !password || password !== confirmPassword) {
-      setError("Vui lòng điền đầy đủ thông tin và đảm bảo mật khẩu trùng khớp!");
-    } else {
-      setError("");
-      // Logic xử lý đăng ký
-      console.log("Đăng ký thành công!");
+
+    // Kiểm tra mật khẩu và xác nhận mật khẩu có khớp không
+    if (password !== confirmPassword) {
+      setError("Mật khẩu và xác nhận mật khẩu không khớp");
+      return;
+    }
+
+    const user = { username, email, password };
+
+    try {
+      const response = await fetch("http://localhost:8000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Đăng ký thành công!");
+        navigate("/sign-in"); // Chuyển hướng tới trang đăng nhập khi đăng ký thành công
+      } else {
+        setError(data.detail);  // Hiển thị lỗi nếu không thành công
+      }
+    } catch (error) {
+      setError("Đã có lỗi xảy ra. Vui lòng thử lại.");
     }
   };
 

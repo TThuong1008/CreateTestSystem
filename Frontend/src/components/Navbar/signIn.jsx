@@ -2,8 +2,9 @@ import React, { useState, useContext } from "react";
 import { motion } from "framer-motion";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../AuthContext"; // Import AuthContext
+import { AuthContext } from "../../AuthContext";
 import loginImg from "../../assets/login.png";
+import { jwtDecode } from "jwt-decode"; // Sửa import
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,16 +12,36 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // Lấy function login từ AuthContext
+  const { login } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email === "a@gmail.com" && password === "123456") {
-      setError("");
-      login("John Doe", "/path/to/profilePic.jpg"); // Gọi login và truyền tên người dùng, ảnh đại diện
-      navigate("/hero"); // Điều hướng sau khi đăng nhập thành công
-    } else {
-      setError("Email hoặc mật khẩu không đúng!");
+
+    const user = { email, password };
+
+    try {
+      const response = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("access_token", data.access_token);
+        console.log("Đăng nhập thành công!");
+
+        const decodedToken = jwtDecode(data.access_token);
+        login(decodedToken.name, "", data.access_token);
+        navigate("/hero");
+      } else {
+        setError(data.detail);
+      }
+    } catch (error) {
+      setError("Đã có lỗi xảy ra. Vui lòng thử lại.");
     }
   };
 

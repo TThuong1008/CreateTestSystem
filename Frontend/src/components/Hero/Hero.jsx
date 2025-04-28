@@ -22,8 +22,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const handleGetStartedClick = () => {
-    if (isLoggedIn) navigate("/create-test");
-    else navigate("/sign-in");
+     navigate("/create-test");
   };
 
   return (
@@ -101,6 +100,7 @@ const Hero = () => {
           )}
         </div>
       )}
+
     </section>
   );
 };

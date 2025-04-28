@@ -11,10 +11,10 @@ const CreateTestForm = ({ handleFileChange, handleGenerateQuestions, successMess
       transition={{ duration: 0.6 }}
     >
       <label className="block mb-4">
-        <span className="text-gray-700 font-semibold">Chọn file văn bản:</span>
+        <span className="text-gray-700 font-semibold">Choose a document file (docx, pdf, pptx):</span>
         <input
           type="file"
-          accept=".txt,.doc,.docx,.pdf"
+          accept=".doc,.docx,.pdf,.pptx"
           className="block w-full mt-2 p-2 border rounded"
           onChange={handleFileChange}
         />
@@ -24,10 +24,9 @@ const CreateTestForm = ({ handleFileChange, handleGenerateQuestions, successMess
         className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200"
         whileHover={{ scale: 1.05 }}
       >
-        <IoMdCloudUpload className="inline-block mr-2" /> Tạo câu hỏi trắc nghiệm
+        <IoMdCloudUpload className="inline-block mr-2" /> Generate multiple-choice questions
       </motion.button>
 
-      {/* Thông báo thành công */}
       {successMessage && (
         <div className="mt-4 text-center text-green-600 font-semibold">
           {successMessage}

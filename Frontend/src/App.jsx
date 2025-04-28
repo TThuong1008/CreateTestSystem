@@ -10,6 +10,7 @@ import Footer from "./components/Footer/Footer";
 import LoginPage from "./components/Navbar/signIn";
 import SignUpPage from "./components/Navbar/signUp";
 import CreateTest from "./components/Services/createTest";
+import TestHistory from "./components/Services/testHistory";
 
 const PrivateRoute = ({ children }) => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -33,15 +34,18 @@ const App = () => {
           }/>
           <Route path="/sign-in" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
-          
+          <Route path="/test-history" element={
+             <PrivateRoute>
+            <TestHistory />
+            </PrivateRoute>} />
           <Route path="/create-test" element={
-            <PrivateRoute>
+          <>
               <CreateTest />
               <Footer />
-            </PrivateRoute>
-          }/>
+              </>
+          }/>   
 
-          <Route path="/hero" element={
+          {/* <Route path="/hero" element={
             <>
             <Hero />
             <Services />
@@ -49,7 +53,7 @@ const App = () => {
             <Subscribe />
             <Banner2 />
             <Footer />
-          </>}/>
+          </>}/> */}
         </Routes>
       </Router>
     </AuthProvider>
